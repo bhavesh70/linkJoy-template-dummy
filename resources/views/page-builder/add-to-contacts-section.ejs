@@ -1,0 +1,247 @@
+<% if(pagebuilder_body['module_type']=='add_to_contacts' && pagebuilder_body['module_data']['title'] &&
+    pagebuilder_body['module_data']['title']) { %>
+<% if(blockHideOrShowWithSchedule( pagebuilder_body['module_type'], pagebuilder_body['is_hidden'],
+        pagebuilder_body['is_scheduled'], pagebuilder_body['scheduled_start_date'],
+        pagebuilder_body['scheduled_end_date'])) { %>
+<div class="subtitle-init margin-bottom-60">
+  <div class="top">
+    <div class="subtitle-row <%= pagebuilder_body && pagebuilder_body.animate ? pagebuilder_body.animate : '' %>">
+      <div class="column col-2 d-none">
+        <div class="column col-8" style="width: 60%;display: contents;">
+          <button class="el-button el-button--primary font-weight-normal text-decoration-none w-80" onclick=`showContent(<%=key %>)`>
+            <i id="sprite-icon" class="fa fa-chevron-down pt-1" style="float:right;vertical-align:top"></i>
+            <span class="remove-margin text-wrap m-0">
+              <%= pagebuilder_body['module_data']['title'] ?
+                                        $pagebuilder_body['module_data']['title'] : '' %>
+            </span>
+          </button>
+          <div id="content-<%=key%>" style="display:none;" class="content w-80 py-3">
+            <div class="m-auto" style=`width: 80%;color: <%=pagebuilder_body['module_data']['font_color']) ?
+                                    $pagebuilder_body['module_data']['font_color'] : '#323232' %>`>
+              <div class="mb-4">
+                <span style="font-size: 20px;font-weight: 800;">
+                  <%= pagebuilder_body.module_data.first_name %>
+                  <%= pagebuilder_body.module_data.last_name %>
+                </span>
+                <br />
+                <span style="font-size: 18px;font-weight: 600;">
+                  <%= pagebuilder_body.module_data.position %>
+
+                  <% if(pagebuilder_body['module_data']['organization']) { %>
+                  <span style="font-size: 18px;font-weight: 600;">
+                    <%= pagebuilder_body.module_data.organization %>
+                  </span>
+                  <% } %>
+                </span>
+              </div>
+              <div class="mb-4">
+                <table class="contact-details" style="border: 0;margin:auto">
+                  <% if(pagebuilder_body['module_data']['email'][0]['address']) { %>
+                  <tr>
+                    <td style="width:20%"></td>
+                    <td style="width:10%;vertical-align:top;">
+                      <i class="fa fa-envelope custom-icon" style="font-weight:100"></i>
+                    </td>
+                    <td style="width:50%;">
+                      <% for(let email of pagebuilder_body['module_data'] ['email'] )
+                                                            { %>
+                      <span class="fw-700 custom-type">
+                        <%=email['type'] %>
+                      </span><br />
+                      <span>
+                        <%=email['address'] %>
+                      </span>
+                      <br />
+                      <% } %>
+                    </td>
+                    <td style="width:20%"></td>
+                  </tr>
+                  <% } %>
+
+                  <% if (pagebuilder_body.module_data.phone[0].number) { %>
+                  <tr>
+                    <td style="width:20%"></td>
+                    <td style="width:10%;vertical-align:top">
+                      <i class="fa fa-phone custom-icon"></i>
+                    </td>
+                    <td style="width:50%;">
+                      <% pagebuilder_body.module_data.phone.forEach(function(phone)
+                                                                        { %>
+                      <span class="fw-700 custom-type">
+                        <%= phone.type %>
+                      </span><br />
+                      <span>
+                        <%= phone.number %>
+                      </span><br />
+                      <% }); %>
+                    </td>
+                    <td style="width:20%"></td>
+                  </tr>
+                  <% } %>
+                  <% if ( pagebuilder_body.module_data.address.street
+                                                                        || pagebuilder_body.module_data.address.city ||
+                                                                        pagebuilder_body.module_data.address.state ||
+                                                                        pagebuilder_body.module_data.address.country ||
+                                                                        pagebuilder_body.module_data.address.zip ) { %>
+                  <tr>
+                    <td style="width:20%"></td>
+                    <td style="width:10%;vertical-align:top">
+                      <i class="fa fa-location-dot custom-icon"></i>
+                    </td>
+                    <td style="width:90%;">
+                      <% if
+                                                                                    (pagebuilder_body.module_data.address.street)
+                                                                                    { %>
+                      <%= pagebuilder_body.module_data.address.street
+                                                                                        %>,
+                      <% } %>
+                      <% if
+                                                                                                (pagebuilder_body.module_data.address.city)
+                                                                                                { %>
+                      <%= pagebuilder_body.module_data.address.city
+                                                                                                    %>,
+                      <% } %>
+                      <% if
+                                                                                                            (pagebuilder_body.module_data.address.state)
+                                                                                                            { %>
+                      <%= pagebuilder_body.module_data.address.state
+                                                                                                                %>,
+                      <% } %>
+                      <% if
+                                                                                                                        (pagebuilder_body.module_data.address.country)
+                                                                                                                        {
+                                                                                                                        %>
+                      <%= pagebuilder_body.module_data.address.country
+                                                                                                                            %>
+                      ,
+                      <% }
+                                                                                                                                %>
+                      <% if
+                                                                                                                                    (pagebuilder_body.module_data.address.zip)
+                                                                                                                                    {
+                                                                                                                                    %>
+                      <%= pagebuilder_body.module_data.address.zip
+                                                                                                                                        %>
+                      <% }
+                                                                                                                                            %>
+                    </td>
+                    <td style="width:20%"></td>
+                  </tr>
+                  <% } %>
+
+                  <% if (pagebuilder_body.module_data.availability) {%>
+                  <tr>
+                    <td style="width:20%"></td>
+                    <td style="width:10%;vertical-align:top">
+                      <i class="fa fa-clock" style="font-size: 17px;font-weight:100"></i>
+                    </td>
+                    <td style="width:50%;">
+                      <span><%= pagebuilder_body.module_data.availability %></span>
+                    </td>
+                    <td style="width:20%"></td>
+                  </tr>
+                  <% } %>
+
+                </table>
+              </div>
+              <button class="el-button el-button--primary el-button--small font-weight-normal w-30" onclick="downloadVcard()">
+                <span class="cta-margin">
+                  <%= pagebuilder_body.module_data.add_to_contacts_cta ? pagebuilder_body.module_data.add_to_contacts_cta : 'Add to Contacts' %>
+                </span>
+              </button>
+            </div>
+          </div>
+          <div class="column col-2 d-none"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% } %>
+
+  <script type="text/javascript">
+    function showContent(key) {
+
+      const content = document.getElementById("content-" + key);
+
+      if (content.style.display == "none") {
+        content.style.display = "block";
+        document.getElementById("sprite-icon").classList.remove("fa-chevron-down")
+        document.getElementById("sprite-icon").classList.add("fa-chevron-up")
+      } else {
+        content.style.display = "none";
+        document.getElementById("sprite-icon").classList.remove("fa-chevron-up")
+        document.getElementById("sprite-icon").classList.add("fa-chevron-down")
+
+      }
+    }
+
+    async function downloadVcard() {
+      await fetch("/download-vcard", {
+        method: "POST",
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+        },
+        data: {
+          first_name: pagebuilder_body.module_data.first_name,
+          last_name: pagebuilder_body.module_data.last_name,
+          job_title: pagebuilder_body.module_data.position,
+          company: pagebuilder_body.module_data.organization,
+          email: JSON.stringify(pagebuilder_body.module_data.email),
+          phone: JSON.stringify(pagebuilder_body.module_data.phone),
+          address: JSON.stringify(pagebuilder_body.module_data.address),
+          availability: pagebuilder_body.module_data.availability,
+        },
+        success: function(response) {
+          const url = window.URL.createObjectURL(new Blob([response], {
+            type: "text/vcard;charset=utf-8"
+          }));
+          const link = document.createElement('a');
+          link.href = url;
+
+          var firstName = pagebuilder_body.module_data.first_name;
+          var lastName = pagebuilder_body.module_data.last_name;
+          var fileName = firstName + '-' + lastName + '.vcf';
+
+          link.setAttribute('download', fileName);
+          document.body.appendChild(link);
+          link.click();
+        },
+        error: function(error) {
+          console.error(error);
+        }
+      });
+    }
+  </script>
+
+  <style>
+    .content {
+      display: none;
+      overflow: hidden;
+      border: 1px #f1f1f1 solid;
+      border-radius: 4px;
+    }
+
+    .custom-type {
+      text-transform: capitalize;
+      font-weight: 700;
+    }
+
+    .custom-icon {
+      font-size: 20px;
+    }
+
+    .contact-details tr:nth-child(even) {
+      background-color: transparent;
+    }
+
+    .cta-margin {
+      line-height: 12px;
+    }
+
+    .cta-margin p {
+      font-size: 14px;
+      margin-bottom: 0rem !important;
+    }
+  </style>
+
+  <% } %>

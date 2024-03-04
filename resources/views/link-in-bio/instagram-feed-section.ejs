@@ -1,0 +1,37 @@
+<div>
+    <% if (insta_posts.length == 0) { %>
+        <p class="text-center mt-3 mb-4">No Post</p>
+        <% } else { %>
+        <% for (let insta_post of insta_posts) { %>
+            <% if (post_layout == 1) { %>
+                <div class="cellContainer-1"> <a class="cell-1"
+                        href="<%= insta_post['bio_link'] %>"
+                        target="_blank"> <img
+                            src="<%= insta_post['image_url'] %>"
+                            alt="" class="img-fluid" /> </a> </div>
+            <% } %>
+            <% if (post_layout == 2) { %>
+                <div class="cellContainer-2"> <a class="cell-2"
+                        href="<%= insta_post['bio_link'] %>"
+                        target="_blank"> <img
+                            src="<%= insta_post['image_url'] %>"
+                            alt="" class="img-fluid" /> </a> </div>
+            <% } %>
+            <% if (post_layout == 3) { %>
+                <div class="cellContainer-3"> <a class="cell-3"
+                        href="<%= insta_post['bio_link'] %>"
+                        target="_blank"> <img
+                            src="<%= insta_post['image_url'] %>"
+                            alt="" class="img-fluid" /> </a> </div>
+            <% } %>
+            <% if (post_layout == 4) { %>
+                <div class="cellContainer-4"> <a class="cell-4"
+                        href="<%= insta_post['bio_link'] %>"
+                        target="_blank"> <img
+                            src="<%= insta_post['image_url'] %>"
+                            alt="" class="img-fluid" /> </a> </div>
+            <% } %>
+        <% } %>
+    <% } %>
+    <div class="clearfix"></div>
+</div>

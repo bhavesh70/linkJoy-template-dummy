@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>LinkJoy</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" />
+    <style>
+        html,
+        body {
+            background-color: #fff;
+            font-family: "Nunito", sans-serif;
+            font-size: 16px;
+            font-weight: normal;
+            margin: 0;
+        }
+
+        * {
+            font-family: "Nunito", sans-serif;
+        }
+    </style>
+</head>
+
+<body
+    style="width: 600px;margin:0 auto;background-color: #fff;font-family: 'Nunito', sans-serif;font-size: 16px;font-weight: normal;">
+    <table style="border-spacing: 1rem;">
+        <tr>
+            <td colspan="3" style="background-color: #f8f9fa;padding: 1rem;text-align:center;">
+                <img src="{{logo}}" alt="LINKJOY" height="30px" />
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <p>Hi,<br /><br />Hope you are doing well. We are glad to have you on board.</p>
+                <p>Please <a href="{{invitation_link}}">click here</a> to join our client portal. Use the
+                    following
+                    login credentials.
+                </p>
+                <p><br />Email : {{email}}<br />Password : {{password}}</p>
+
+                <p><br />The team,<br />{{company_name}}</p>
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>

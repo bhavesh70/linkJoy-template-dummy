@@ -1,0 +1,116 @@
+body {
+	background-color: #000000;
+	font-size: 18px;
+}
+
+.popup-overlay {
+	/*Hides pop-up when there is no "active" class*/
+	visibility: hidden;
+	background: #ffffff;
+	border-radius: 10px;
+	width: 350px;
+	margin: 10vh auto 0;
+}
+
+.popup-overlay.active {
+	/*displays pop-up when "active" class is present*/
+	visibility: visible;
+	text-align: center;
+}
+
+.popup-content {
+	padding: 1.5rem 3rem;
+	text-align: center;
+	/*Hides pop-up content when there is no "active" class */
+	visibility: hidden;
+}
+
+.popup-content.active {
+	/*Shows pop-up content when "active" class is present */
+	visibility: visible;
+}
+
+h2 {
+	font-weight: 900;
+	font-size: 28px;
+	line-height: 48px;
+}
+
+p {
+	font-size: 18px;
+}
+
+.accept-btn {
+	display: inline-block;
+	line-height: 1;
+	white-space: nowrap;
+	cursor: pointer;
+	color: #ffffff;
+	background-color: #394eb4;
+	border: 1px solid #dcdfe6;
+	border-color: #394eb4;
+	-webkit-appearance: none;
+	text-align: center;
+	box-sizing: border-box;
+	outline: none;
+	margin: 0;
+	transition: 0.1s;
+	font-weight: 600;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	padding: 12px 20px;
+	font-size: 14px;
+	border-radius: 4px;
+	margin-top: 16px;
+	margin-bottom: 16px;
+}
+
+.decline {
+	cursor: pointer;
+	text-decoration: underline;
+}
+
+a {
+	color: #394eb4;
+}
+
+/* Media Query for Mobile Devices */
+@media (max-width: 480px) {
+	.popup-overlay {
+		margin-top: 10vh;
+		width: 95%;
+	}
+}
+
+/* Media Query for low resolution Tablets, Ipads */
+@media (min-width: 481px) and (max-width: 767px) {
+	.popup-overlay {
+		margin-top: 10vh;
+		width: 95%;
+	}
+}
+
+/* Media Query for Tablets Ipads portrait mode */
+@media (min-width: 768px) and (max-width: 1024px) {
+	.popup-overlay {
+		margin-top: 10vh;
+		width: 60vw;
+	}
+}
+
+/* MediaQuery for Laptops and Desktops */
+@media (min-width: 1025px) and (max-width: 1280px) {
+	.popup-overlay {
+		margin-top: 10vh;
+		width: 50vw;
+	}
+}
+
+/* Media Query for Large screens */
+@media (min-width: 1281px) {
+	.popup-overlay {
+		margin-top: 10vh;
+		width: 40vw;
+	}
+}

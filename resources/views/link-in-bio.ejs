@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('unique-section/head-og-tags', {og_tags : og_tags}) %>
+  <!-- Start Head Unique Section -->
+  <%- include('unique-section/head', {favicon : favicon, branding : branding, facebook_pixel_tracking_id :
+      facebook_pixel_tracking_id, google_analytics_tracking_id : google_analytics_tracking_id}) %>
+
+  <!-- End Head Unique Section -->
+
+
+  <link rel="stylesheet" href="/css/link-in-bio.css">
+
+  <!-- Start Head With Analytics Section -->
+  <%- include('./unique-section/head-analytics.ejs', {tracking : tracking_list}) %>
+  <!-- End Head With Analytics Section -->
+
+  <script>
+    const linkInBioEL = document.querySelector("link-in-bio-main")
+    const sensitiveAgeModalEl = document.querySelector("sensitive-age-modal")
+    window.onload = function() {
+
+      if (content_age_limit == 1 || content_age_limit == 18 || content_age_limit == 21 || content_age_limit == 25) {
+
+        linkInBioEL.style.display = none;
+        sensitiveAgeModalEl.style.display = block;
+      } else {
+
+        linkInBioEL.style.display = block;
+        sensitiveAgeModalEl.style.display = none;
+      }
+    }
+  </script>
+</head>
+
+<body>
+  <div class="sensitive-age-modal" style="display: none;">
+    <div class="popup-overlay">
+      <!--Creates the popup content-->
+      <div class="popup-content">
+        <img src="sprite/svg/eye-off-sharp.svg" alt="hide" width="100" height="100">
+        <h2>Sensitive Content</h2>
+        <% if (content_age_limit==1) { %>
+        <h4 class="font-weight-normal">Confirm that you are willing to see potentially sensitive content.</h4>
+        <% } else { %>
+        <h4 class="font-weight-normal">Confirm that you are of legal age to view this content.</h4>
+        <% } %>
+        <button class="accept-btn" onclick='proceedSuccess()'>
+          <% if (content_age_limit===1) { %>
+          I Confirm
+          <% } else { %>
+          I am <%- content_age_limit %> or older
+          <% } %>
+        </button>
+        <div class="decline" onclick="closePopup()">
+          <% if (content_age_limit===1) { %>
+          Go Back
+          <% } else { %>
+          I am under <%= content_age_limit %>
+          <% } %>
+          <% </div>
+              </div>
+      </div>
+      <div class="footer">
+        <a class="text-decoration-none footer-link"
+          href="https://linkjoy.io/?utm_source=LNKJ&utm_medium=Footer&utm_campaign=LNKJ" target="_blank"
+          rel="noopener noreferrer">Powered by <img src="'sprite/svg/linkjoy-header-logo.svg" alt="LINKJOY"
+            height="25px"></a>
+      </div>
+    </div>
+
+    <div class="container link-in-bio-main" style="display: none;">
+      <%- include('link-in-bio/profile-section', { description : description, profile_layout : profile_layout, profile :
+        profile, title : title, button_url : button_url, button_text : button_text }) %>
+          <%- include('link-in-bio/profile-section', { insta_posts : insta_posts, post_layout : post_layout }) %>
+        </div>
+
+        <% if (branding === 1) { %>
+        <%- include('page-builder/footer') %>
+        <% }
+        
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous">
+        </script>
+</body>
+
+<script>
+  window.onload = () => {
+    if("<%= is_clicks_exceeded  %>")
+        {
+        save_analytics();
+        }
+        }
+
+        async function save_analytics() {
+        await fetch("/link-in-bio/analytics", {
+        method : "POST",
+        headers: {
+        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+        },
+        data: {
+        analytics: {
+        link_in_bio_id:"<%= analyticsData['link_in_bio_id'] %>",
+        ip_address:"<%= analyticsData['ip_address'] %>",
+        country:"<%= analyticsData['country'] %>",
+        state:"<%= analyticsData['state'] %>",
+        city:"<%= analyticsData['city'] %>",
+        timezone:"<%= analyticsData['timezone'] %>",
+        device:"<%= analyticsData['device'] %>",
+        platform:"<%= analyticsData['platform'] %>",
+        browser:"<%= analyticsData['browser'] %>",
+        browser_version:"<%= analyticsData['browser_version'] %>",
+        referrer:"<%= analyticsData['referrer'] %>"
+        }
+        },
+        success: function(response) {
+        console.log('success');
+        }
+        })
+        }
+
+        function closePopup(){
+        window.location.href('https://linkjoy.io/')
+        };
+
+        function proceedSuccess() {
+        linkInBioEL.style.display = block;
+        sensitiveAgeModalEl.style.display = none;
+        }
+        </script>
+
+</html>
