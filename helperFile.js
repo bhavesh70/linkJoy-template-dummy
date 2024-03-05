@@ -1,3 +1,153 @@
+const { URL } = require("url");
+
+function processUrl(originalUrl, scheme) {
+	const parsedUrl = new URL(originalUrl);
+
+	// Check if the URL already has a scheme
+	if (!parsedUrl.protocol) {
+		// If it doesn't have a scheme, prepend the specified scheme
+		parsedUrl.protocol = `${scheme}:`;
+	}
+
+	// Convert the URL object back to a string
+	const modifiedUrl = parsedUrl.toString();
+
+	return modifiedUrl;
+}
+
+const giveDeepLinkUrl = (useragent, url, scheme = "https://") => {
+	// console.log({ url });
+	// console.log({ useragent });
+	const link = processUrl(url, scheme);
+
+	const deepLink = null; // TEMP
+
+	// const deepLink = deepLnkApEvntDb.findOne({
+	// 	where: db.sequelize.literal("? LIKE CONCAT('%', `domain_url`, '%'))"),
+	// 	replacements: [link],
+	// 	include: {
+	// 		model: db.deep_link_apps,
+	// 		as: "App",
+	// 	},
+	// });
+
+	if (deepLink) {
+		const userName = link.replace(deepLink.domain_url, "");
+
+		if (useragent.isAndroid) {
+			if (deepLink.App.app_name === "WhatsApp") {
+				const substr = link.replace(deepLink.domain_url, "");
+
+				let androidLink = "";
+				if (substr.includes("'?text='")) {
+					let substrParts = substr.split("?text=");
+					let number = substrParts[0];
+					let textMsg = substrParts[1];
+
+					// Splitting the deepLink.event_slug based on ','
+					let slugParts = deepLink.event_slug.split(",");
+					let slugNumber = slugParts[0];
+					let slugMsg = slugParts[1];
+
+					// Replacing values in the android link
+					androidLink = deepLink.android_link.replace(
+						slugNumber,
+						number
+					);
+					androidLink = androidLink.replace(slugMsg, textMsg);
+				} else {
+					androidLink = deepLink.android_link.replace(
+						"phone_number&text=text_message",
+						substr
+					);
+				}
+				return androidLink;
+			} else if (deepLink.App.app_name === "Slack") {
+				const substr = link.replace(deepLink.domain_url, "");
+				const teamId = substr.split("/")[0];
+				const channelId = substr.split("/")[1];
+
+				const slugTeamSplit = deepLink.event_slug.split(",");
+				const slugTeam = slugTeamSplit[0];
+				const slugChannel = slugTeamSplit[1];
+
+				let androidLink = deepLink.android_link.replace(
+					slugTeam,
+					teamId
+				);
+				androidLink = androidLink.replace(slugChannel, channelId);
+
+				return androidLink;
+			} else {
+				let androidLink = deepLink.android_link.replace(
+					deepLink.event_slug,
+					userName
+				);
+				return androidLink;
+			}
+		} else if (useragent.isiPhone || useragent.isiPod || useragent.isiPad) {
+			let iosLink = null;
+			if (deepLink.App.app_name === "WhatsApp") {
+				const substr = link.replace(deepLink.domain_url, "");
+				if (substr.includes("?text=")) {
+					const substrSplit = substr.split("?text=");
+					const number = substrSplit[0];
+					const textMsg = substrSplit[1];
+
+					const slugSplit = deepLink.event_slug.split(",");
+					const slugNumber = slugSplit[0];
+					const slugMsg = slugSplit[1];
+
+					iosLink = deepLink.ios_link.replace(slugNumber, number);
+					iosLink = iosLink.replace(slugMsg, textMsg);
+				} else {
+					iosLink = deepLink.android_link.replace(
+						"phone_number&text=text_message",
+						substr
+					);
+				}
+				return iosLink;
+			} else if (deepLink.App.app_name === "Slack") {
+				const substr = link.replace(deepLink.domain_url, "");
+				const teamId = substr.split("/")[0];
+				const channelId = substr.split("/")[1];
+
+				const slugTeamSplit = deepLink.event_slug.split(",");
+				const slugTeam = slugTeamSplit[0];
+				const slugChannel = slugTeamSplit[1];
+
+				iosLink = deepLink.iosLink.replace(slugTeam, teamId);
+				iosLink = iosLink.replace(slugChannel, channelId);
+				return iosLink;
+			} else if (deepLink.App.app_name === "Airbnb") {
+				const n = link.indexOf("/", 8);
+				const userName = link.substring(n + 1);
+
+				iosLink = deepLink.ios_link.replace(
+					deepLink.event_slug,
+					userName
+				);
+				return iosLink;
+			}
+		} else {
+			return link;
+		}
+	} else {
+		return link;
+	}
+};
+
+const getValidUrl = (url) => {
+	const scheme = "https://";
+	const parsedUrl = new URL(url);
+
+	if (!parsedUrl.protocol) {
+		return scheme + url;
+	} else {
+		return url;
+	}
+};
+
 const blockHideOrShowWithSchedule = (
 	type,
 	isHide,
@@ -57,4 +207,6 @@ const pagebuilderThemes = (key, name, opacity = null) => {
 module.exports = {
 	pagebuilderThemes,
 	blockHideOrShowWithSchedule,
+	getValidUrl,
+	giveDeepLinkUrl,
 };

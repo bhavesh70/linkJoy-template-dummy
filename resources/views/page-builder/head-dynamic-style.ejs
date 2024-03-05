@@ -1,19 +1,20 @@
 <style>
   body {
-    font-family: "<%=(is_font_family && is_font_family !=="") ? is_font_family.replace('-', ' ') + ' !important': ''%>";
+    font-family: <%=(is_font_family && is_font_family !=="") ? is_font_family.replace('-', ' ') + ' !important': ''%>;
   }
 
   .section-init .el-button {
-    background: "<%=button_style && button_style.background ? button_style.background: ''%>";
-    color: "<%=button_style && button_style.fontColor ? button_style.fontColor: ''%>";
+    color: <%=button_style && button_style.fontColor ? button_style.fontColor: ''%>;
+    background: <%=button_style && button_style.background ? button_style.background: ''%>;
   }
 
+
   .section-init.hardshadow .el-button {
-    box-shadow: 4px 4px 0 0 "<%=button_style && button_style.background ? button_style.background + '66': '#3346A266'%>";
+    box-shadow: 4px 4px 0 0 <%=button_style && button_style.background ? button_style.background + '66': '#3346A266'%>;
   }
 
   .section-init.softshadow .el-button {
-    box-shadow: 2px 2px 0 0" <%=button_style && button_style.background ? button_style.background + '66': '#3346A266'%>";
+    box-shadow: 2px 2px 0 0 <%=button_style && button_style.background ? button_style.background + '66': '#3346A266'%>;
   }
 
   .remove-margin p {

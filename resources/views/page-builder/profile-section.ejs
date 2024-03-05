@@ -13,7 +13,7 @@
     </div>
     <% if (profile['module_data']['button_title']) { %>
     <div class="first-column" style="text-align:right">
-      <a href="javascript:void(0)" class="redirect_url_call el-button el-button--primary text-decoration-none profile-button redirect_url_call font-weight-normal" data-href=`<%= profile['module_data']['button_url'] && (profile['module_data']['button_url'] ? getValidURL(profile['module_data']['button_url']):'#'); %>`>
+      <a href="javascript:void(0)" class="redirect_url_call  el-button--primary el-button text-decoration-none profile-button redirect_url_call font-weight-normal" data-href=`<%= profile['module_data']['button_url'] && (profile['module_data']['button_url'] ? getValidURL(profile['module_data']['button_url']):'#'); %>`>
         <span class="remove-margin"><%-  profile['module_data']['button_title']?profile['module_data']['button_title']:""
            %></span>
       </a>
@@ -40,7 +40,7 @@
     <div class="second-column">
       <a href="javascript:void(0)" class="redirect_url_call el-button el-button--primary text-decoration-none profile-button font-weight-normal" data-href="<%= profile['module_data']['button_url'] ? getValidURL(profile['module_data']['button_url']) : "#"  %>">
         <span class="remove-margin">
-          <%= profile['module_data']['button_title'] ? profile['module_data']['button_title'] : "" %>
+          <%- profile['module_data']['button_title'] ? profile['module_data']['button_title'] : "" %>
         </span>
       </a>
     </div>
