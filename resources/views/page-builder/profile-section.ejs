@@ -1,0 +1,75 @@
+<% if (profile.layout_type === 1) { %>
+<div class="profile_init margin-bottom-60">
+  <div class="first-row">
+    <div class="first-column">
+      <span class="profile-pic-realtime">
+        <% if (profile.profile_pic) { %>
+        <img src="<%= profile.profile_pic ? profile.profile_pic : '' %>" style="margin-left: 10px; position: unset; display: inline-grid;">
+        <% } %>
+      </span>
+      <span class="brand-title brand-font">
+        <%- profile['module_data']['brand_title'] ? profile['module_data']['brand_title']:"" %>
+      </span>
+    </div>
+    <% if (profile['module_data']['button_title']) { %>
+    <div class="first-column" style="text-align:right">
+      <a href="javascript:void(0)" class="redirect_url_call el-button el-button--primary text-decoration-none profile-button redirect_url_call font-weight-normal" data-href=`<%= profile['module_data']['button_url'] && (profile['module_data']['button_url'] ? getValidURL(profile['module_data']['button_url']):'#'); %>`>
+        <span class="remove-margin"><%-  profile['module_data']['button_title']?profile['module_data']['button_title']:""
+           %></span>
+      </a>
+    </div>
+    <% } %>
+  </div>
+</div>
+<% } else if (profile['layout_type'] === 2) { %>
+<div class="profile_init margin-bottom-60">
+  <div class="second-row">
+    <div class="second-column" style="display: inline-table;">
+      <span class="profile-pic-realtime">
+        <% if (profile['profile_pic']) { %>
+        <img src="<%= profile['profile_pic'] ? profile['profile_pic'] : '' %>" style="margin-left: 10px; position: unset; display: inline-grid;">
+        <% } %>
+      </span>
+    </div>
+    <div class="second-column">
+      <span class="brand-font">
+        <%- profile['module_data']['brand_title'] ? profile['module_data']['brand_title'] : "" %>
+      </span>
+    </div>
+    <% if (profile['module_data']['button_title']) { %>
+    <div class="second-column">
+      <a href="javascript:void(0)" class="redirect_url_call el-button el-button--primary text-decoration-none profile-button font-weight-normal" data-href="<%= profile['module_data']['button_url'] ? getValidURL(profile['module_data']['button_url']) : "#"  %>">
+        <span class="remove-margin">
+          <%= profile['module_data']['button_title'] ? profile['module_data']['button_title'] : "" %>
+        </span>
+      </a>
+    </div>
+    <% } %>
+  </div>
+</div>
+
+<% } else if (profile['layout_type'] === 3) { %>
+<div class="profile_init margin-bottom-60">
+  <div class="third-row">
+    <% if (profile['module_data']['button_title']) { %>
+    <div class="third-column">
+      <a href="javascript:void(0)" class="redirect_url_call el-button el-button--primary text-decoration-none profile-button font-weight-normal" data-href="<%= profile['module_data']['button_url'] ? getValidURL(profile['module_data']['button_url']) : "#"  %>">
+        <span class="remove-margin">
+          <%= profile['module_data']['button_title'] ? profile['module_data']['button_title'] : "" %>
+        </span>
+      </a>
+    </div>
+    <% } %>
+    <div class="third-column d-flex align-items-center justify-content-end">
+      <span class="brand-title-third brand-font" style=" display: inline-block;float: right;">
+        <%- profile['module_data']['brand_title'] ? profile['module_data']['brand_title'] : "" %>
+      </span>
+      <span class="profile-pic-realtime" style="float: right; margin-right: 13px;">
+        <% if (profile['profile_pic']) { %>
+        <img src="<%= profile['profile_pic'] ? profile['profile_pic'] : "" %>" style="margin-left: 10px; position: unset; display: inline-grid;">
+        <% } %>
+      </span>
+    </div>
+  </div>
+</div>
+<% } %>

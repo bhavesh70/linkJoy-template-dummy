@@ -83,16 +83,18 @@
   </div>
 
   <!-- <h1>Hello World</h1> -->
-  <div class=`section-init <%= button_style['class'] ? button_style['class'] : '' %>` style="display: none;">
+  <!-- <div class=`section-init <%= button_style['class'] ? button_style['class'] : '' %>` style="display: none;"> -->
+  <div class=`section-init <%= button_style['class'] ? button_style['class'] : '' %>`>
     <div class="container-customize mx-auto">
-      <div class="preloader">
+      <!-- <div class="preloader">
         <div class="preloader-custom-gif">
           <div class="loader"></div>
         </div>
-      </div>
+      </div> -->
       <div id="el-main-section-container-inner">
         <!--End profile code -->
         <!-- TODO: jaimin - ('page-builder.profile-section' ) Yet to be created -->
+        <%- include('page-builder/profile-section.ejs', {tracking : profile}) %>
         <!--End profile code -->
         <% const image_carousel = false; %>
         <% if (pagebuilder && pagebuilder.length !== 0) { %>
@@ -100,6 +102,7 @@
         <!--Start subtitle text code -->
         <!-- TODO: jaimin - ('page-builder.subtitle-text-section' ) Yet to be created -->
         <!--End subtitle text code -->
+
 
         <!--Start button text code -->
         <!-- TODO: jaimin - ('page-builder.button-text-section' ) Yet to be created -->
@@ -159,6 +162,10 @@
 
         <!--Start Add to Contacts code -->
         <!-- TODO: jaimin - ('page-builder.add-to-contacts-section' ) Yet to be created -->
+        <%- include('page-builder/add-to-contacts-section.ejs', {
+                            blockHideOrShowWithSchedule : blockHideOrShowWithSchedule,
+                            key : key,
+                            pagebuilder_body : pagebuilder_body}) %>
         <!--End Add to Contacts code -->
 
         <!--Start Html Code -->
