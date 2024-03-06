@@ -1,0 +1,87 @@
+<!-- TODO: jaimin - pass the "useragent" from the parameter -> from the controller -->
+<% if (pagebuilder_body['module_type'] === 'button_text' && (pagebuilder_body['module_data']['button_title'] && pagebuilder_body['module_data']['button_title'])) { %>
+<% if ( blockHideOrShowWithSchedule(pagebuilder_body['module_type'],
+        pagebuilder_body['is_hidden'],
+        pagebuilder_body['is_scheduled'],
+        pagebuilder_body['scheduled_start_date'],
+        pagebuilder_body['scheduled_end_date'])) { %>
+<div class="subtitle-init margin-bottom-60">
+  <% if (pagebuilder_body['layout_type'] == 1 && (pagebuilder_body['module_data']['button_title'] && pagebuilder_body['module_data']['button_title'])) { %>
+  <div class="top">
+    <div class="subtitle-row">
+      <div class="column col-2 d-none"></div>
+
+      <div class="column col-8" style="width: 60%;display: contents;">
+
+        <a href="javascript:void(0)" data-href="<%=pagebuilder_body['module_data']['button_link'] ? giveDeepLinkUrl(useragent,pagebuilder_body['module_data']['button_link']) : '#' %>" class="redirect_url_call el-button el-button--primary font-weight-normal text-decoration-none <%= pagebuilder_body['size'] ? pagebuilder_body['size'] : '' %> <%= pagebuilder_body['animate'] ? pagebuilder_body['animate'] : '' %> ">
+          <span class="remove-margin text-wrap">
+            <%- pagebuilder_body['module_data']['button_title'] ? pagebuilder_body['module_data']['button_title'] : '' %>
+          </span>
+        </a>
+      </div>
+      <div class="column col-2 d-none"></div>
+    </div>
+  </div>
+  <% } else if (pagebuilder_body['layout_type'] == 2 && pagebuilder_body['module_data']['button_title']) { %>
+  <div class="top margin-bottom-60">
+    <div class="subtitle-row">
+      <div class="column col-2 d-none"></div>
+      <div class="column m-auto <%=  pagebuilder_body['size'] ? pagebuilder_body['size'] : ''  %>">
+        <a href="javascript:void(0)" data-href="<%= pagebuilder_body['module_data']['button_link'] ? giveDeepLinkUrl(useragent,pagebuilder_body['module_data']['button_link'], ) : '#' %>" class="redirect_url_call text-decoration-none">
+          <div class="button-text-row d-flex align-items-center el-button font-weight-normal mx-auto p-0 <%= pagebuilder_body['animate'] ? pagebuilder_body['animate'] : '' %> ">
+            <img src="<%= pagebuilder_body['btn_pic'] ? pagebuilder_body['btn_pic'] : '' %>" />
+            <div class="button-text-row__text">
+              <span class="remove-margin px-3 text-wrap">
+                <%- pagebuilder_body['module_data']['button_title'] ? pagebuilder_body['module_data']['button_title'] : '' %>
+              </span>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="column col-2 d-none"></div>
+    </div>
+  </div>
+
+  <% } else if (pagebuilder_body['layout_type'] == 3 && pagebuilder_body['module_data']['button_title']) { %>
+  <div class="top margin-bottom-60">
+    <div class="subtitle-row">
+      <div class="column col-2 d-none"></div>
+      <div class="column m-auto">
+        <a href="javascript:void(0)" class="redirect_url_call" data-href="<%= pagebuilder_body['module_data']['button_link'] ? giveDeepLinkUrl(useragent,pagebuilder_body['module_data']['button_link'],) : '#' %>">
+          <div class="button-text-row el-button p-0 <%= pagebuilder_body['size'] ? pagebuilder_body['size'] : "" %> ">
+            <img class="button-text-row__image-third rounded-top" src="<%= pagebuilder_body['btn_pic'] ? pagebuilder_body['btn_pic'] : '' %>" />
+            <div class="button-text-row__text-fourth rounded-bottom">
+              <span class="remove-margin text-wrap">
+                <%- pagebuilder_body['module_data']['button_title'] ? ['module_data']['button_title'] : "" %>
+              </span>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="column col-2 d-none"></div>
+    </div>
+  </div>
+
+  <% } else if (pagebuilder_body['layout_type'] == 4 && pagebuilder_body['module_data']['button_title']) { %>
+  <div class="top margin-bottom-60">
+    <div class="subtitle-row">
+      <div class="column col-2 d-none"></div>
+      <div class="column m-auto">
+        <a href="javascript:void(0)" class="redirect_url_call" data-href="<%= pagebuilder_body['module_data']['button_link'] ? giveDeepLinkUrl(useragent,pagebuilder_body['module_data']['button_link'],) : '#' %>">
+          <div class="button-text-row el-button p-0 <%= pagebuilder_body['size'] ? pagebuilder_body['size'] : '' %> ">
+            <img class="button-text-row__image-third rounded-top" src="<%= pagebuilder_body['btn_pic'] ? pagebuilder_body['btn_pic'] : '' %>" />
+            <div class="button-text-row__text-fourth rounded-bottom">
+              <span class="remove-margin text-wrap">
+                <%= pagebuilder_body['module_data']['button_title'] ? pagebuilder_body['module_data']['button_title'] : '' %>
+              </span>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="column col-2 d-none"></div>
+    </div>
+  </div>
+  <% } %>
+</div>
+<% } %>
+<% } %>

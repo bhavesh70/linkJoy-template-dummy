@@ -1,0 +1,27 @@
+<% if (pagebuilder_body['module_type'] == 'i_frame') { %>
+<% if (blockHideOrShowWithSchedule(
+        pagebuilder_body['module_type'],
+        pagebuilder_body['is_hidden'],
+        pagebuilder_body['is_scheduled'],
+        pagebuilder_body['scheduled_start_date'],
+        pagebuilder_body['scheduled_end_date'])) { %>
+<div class="subtitle-init margin-bottom-60">
+  <div class="top">
+    <div class="subtitle-row">
+      <div class="column col-2 d-none"></div>
+      <div class="column m-auto">
+        <div>
+          <span style="margin-bottom: 12px;">
+            <%- pagebuilder_body['title'] ? pagebuilder_body['title'] : '' %>
+          </span>
+        </div>
+        <% if (pagebuilder_body['module_data']['iframe_link']) { %>
+        <iframe title="<%= pagebuilder_body['title']  ? stripTags(pagebuilder_body['title']) : '' %>" src="<%= pagebuilder_body['module_data']['iframe_link'] && pagebuilder_body['module_data']['iframe_link'].includes('https://') ? pagebuilder_body['module_data']['iframe_link'] : ''  %>" width="<%= pagebuilder_body.module_data.width ? pagebuilder_body.module_data.width + '%' : '' %>" height="<%= pagebuilder_body['module_data']['height'] ? pagebuilder_body['module_data']['height'] : '' %>" crossorigin="anonymous" target="_parent" allow="encrypted-media camera;microphone"></iframe>
+        <% } %>
+      </div>
+      <div class="column col-2 d-none"></div>
+    </div>
+  </div>
+</div>
+<% } %>
+<% } %>

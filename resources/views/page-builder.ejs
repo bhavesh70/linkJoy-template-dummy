@@ -10,7 +10,6 @@
 
   <!-- End Head Unique Section -->
   <link href="https://fonts.googleapis.com/css2?family=<%= (is_font_family && is_font_family !== "") ? is_font_family.replace('-', '+') : 'Nunito+Sans' %>" rel="stylesheet">
-  <link href="/css/page-builder.css" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
   <script src="https://wlada.github.io/vue-carousel-3d/js/vue.js"></script>
   <script src="https://wlada.github.io/vue-carousel-3d/js/carousel-3d.umd.js"></script>
@@ -19,15 +18,14 @@
   <script src="https://kit.fontawesome.com/ee531d6919.js" crossorigin="anonymous"></script>
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
-
-  <link rel="stylesheet" href="/css/link-in-bio.css">
+  <link href="/css/page-builder.css" rel="stylesheet">
 
   <!-- Start Head With Analytics Section -->
   <%- include('unique-section/head-analytics.ejs', {tracking : tracking_list}) %>
   <!-- End Head With Analytics Section -->
   <%- include('page-builder/head-dynamic-style.ejs', {
-    button_style : "button_style",
-    is_font_family : "is_font_family"
+    button_style : button_style,
+    is_font_family : is_font_family
   }) %>
 
   <script>
@@ -83,9 +81,11 @@
   </div>
 
   <!-- <h1>Hello World</h1> -->
+  <!--~ UNCOMMENT THIS LATER -->
   <!-- <div class=`section-init <%= button_style['class'] ? button_style['class'] : '' %>` style="display: none;"> -->
-  <div class=`section-init <%= button_style['class'] ? button_style['class'] : '' %>`>
-    <div class="container-customize mx-auto">
+  <div class="section-init  <%= button_style['class'] ? button_style['class'] : '' %>">
+    <div class=" container-customize mx-auto">
+      <!-- //~ UNCOMMENT THIS LATER -->
       <!-- <div class="preloader">
         <div class="preloader-custom-gif">
           <div class="loader"></div>
@@ -93,23 +93,30 @@
       </div> -->
       <div id="el-main-section-container-inner">
         <!--End profile code -->
-        <!-- TODO: jaimin - ('page-builder.profile-section' ) Yet to be created -->
-        <%- include('page-builder/profile-section.ejs', {tracking : profile}) %>
+        <%- include('page-builder/profile-section.ejs', {profile : profile, getValidURL : getValidUrl}) %>
         <!--End profile code -->
         <% const image_carousel = false; %>
         <% if (pagebuilder && pagebuilder.length !== 0) { %>
         <% pagebuilder.forEach((pagebuilder_body, key) => { %>
         <!--Start subtitle text code -->
-        <!-- TODO: jaimin - ('page-builder.subtitle-text-section' ) Yet to be created -->
+        <%- include('page-builder/subtitle-text-section.ejs', { stripTags : stripTags, blockHideOrShowWithSchedule : blockHideOrShowWithSchedule,
+                            key : key,
+                            pagebuilder_body : pagebuilder_body}) %>
         <!--End subtitle text code -->
 
-
         <!--Start button text code -->
-        <!-- TODO: jaimin - ('page-builder.button-text-section' ) Yet to be created -->
+        <%- include('page-builder/button-text-section.ejs', {
+                            blockHideOrShowWithSchedule : blockHideOrShowWithSchedule,
+                            giveDeepLinkUrl : giveDeepLinkUrl,
+                            useragent : useragent,
+                            key : key,
+                            pagebuilder_body : pagebuilder_body}) %>
         <!--End button text code -->
 
         <!--Start i-Frame code -->
-        <!-- TODO: jaimin - ('page-builder.iframe-section' ) Yet to be created -->
+        <%- include('page-builder/iframe-section.ejs', {blockHideOrShowWithSchedule : blockHideOrShowWithSchedule,
+                            key : key,
+                            pagebuilder_body : pagebuilder_body}) %>
         <!--End i-Frame code -->
 
         <!--Start social link code -->
