@@ -83,9 +83,8 @@
   <!-- <h1>Hello World</h1> -->
   <!--~ UNCOMMENT THIS LATER -->
   <!-- <div class=`section-init <%= button_style['class'] ? button_style['class'] : '' %>` style="display: none;"> -->
-  <div class="section-init <%= button_style['class'] ? button_style['class'] : '' %>">
+  <div class="section-init  <%= button_style['class'] ? button_style['class'] : '' %>">
     <div class=" container-customize mx-auto">
-
       <!-- //~ UNCOMMENT THIS LATER -->
       <!-- <div class="preloader">
         <div class="preloader-custom-gif">
@@ -100,11 +99,12 @@
         <% if (pagebuilder && pagebuilder.length !== 0) { %>
         <% pagebuilder.forEach((pagebuilder_body, key) => { %>
         <!--Start subtitle text code -->
-        <!-- TODO: jaimin - ('page-builder.subtitle-text-section' ) Yet to be created -->
+        <%- include('page-builder/subtitle-text-section.ejs', { stripTags : stripTags, blockHideOrShowWithSchedule : blockHideOrShowWithSchedule,
+                            key : key,
+                            pagebuilder_body : pagebuilder_body}) %>
         <!--End subtitle text code -->
 
         <!--Start button text code -->
-        <!-- TODO: jaimin - ('page-builder.button-text-section' ) Yet to be created -->
         <%- include('page-builder/button-text-section.ejs', {
                             blockHideOrShowWithSchedule : blockHideOrShowWithSchedule,
                             giveDeepLinkUrl : giveDeepLinkUrl,
@@ -114,7 +114,9 @@
         <!--End button text code -->
 
         <!--Start i-Frame code -->
-        <!-- TODO: jaimin - ('page-builder.iframe-section' ) Yet to be created -->
+        <%- include('page-builder/iframe-section.ejs', {blockHideOrShowWithSchedule : blockHideOrShowWithSchedule,
+                            key : key,
+                            pagebuilder_body : pagebuilder_body}) %>
         <!--End i-Frame code -->
 
         <!--Start social link code -->

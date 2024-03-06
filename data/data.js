@@ -3,6 +3,8 @@ const {
 	blockHideOrShowWithSchedule,
 	giveDeepLinkUrl,
 	getValidUrl,
+	stripTags,
+	pagebuilderSocialLink,
 } = require("../helperFile");
 
 exports.data = {
@@ -12,7 +14,8 @@ exports.data = {
 	pagebuilderThemes,
 	giveDeepLinkUrl,
 	blockHideOrShowWithSchedule,
-
+	stripTags,
+	pagebuilderSocialLink,
 	useragent: {
 		isYaBrowser: false,
 		isAuthoritative: true,
@@ -537,6 +540,29 @@ exports.data = {
 				button_link: "https://www.instagram.com/samuellaws/",
 			},
 			animate: "",
+		},
+		{
+			id: 9,
+			position: 1,
+			module_type: "i_frame",
+			name: "IFrame",
+			title: "<p>MY Youtube Video</p>",
+			icon: "code-working-outline",
+			layout_type: null,
+			is_hidden: false,
+			is_scheduled: false,
+			scheduled_start_date: null,
+			scheduled_end_date: {
+				start: "4:00 PM",
+				end: "4:05 PM",
+				timezone: "Asia/Calcutta",
+			},
+			size: "w-80",
+			module_data: {
+				iframe_link: "https://linkjoy.io",
+				width: 100,
+				height: 400,
+			},
 		},
 		{
 			id: 1,

@@ -28,6 +28,6 @@ app.get("/", (req, res) => {
 	res.render("page-builder", data);
 });
 
-app.listen(5000, () => {
-	console.log("App is running at port 5000");
+app.listen(5001, () => {
+	console.log("App is running at port 5001");
 });
